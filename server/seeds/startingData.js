@@ -1,30 +1,30 @@
 const users = [
     {
-        username: "",
-        email: "",
-        password: "",
+        username: "drestivo",
+        email: "davidr@gmail.com",
+        password: "Bootcamp@2",
         notes: []
     },
     {
-        username: "",
-        email: "",
-        password: "",
+        username: "jamesC",
+        email: "jamesc@hotmail.com",
+        password: "Bootcamp@3",
         notes: []
     }
 ];
 
 const notes = [
     {
-        category: "",
-        text: "",
-        link: "",
-        username: ""
+        category: "html",
+        text: "link to my project 1 with useful html",
+        link: " https://github.com/davidrestivo/project-1-columbia ",
+        username: "drestivo"
     },
     {
-        category: "",
-        text: "",
-        link: "",
-        username: ""
+        category: " css ",
+        text: "link to my project 2 with some great css",
+        link: "https://github.com/davidrestivo/4-Real-Estate",
+        username: "jamesC"
     }
 ];
 
