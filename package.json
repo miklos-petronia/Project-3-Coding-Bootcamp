@@ -6,7 +6,7 @@
   "scripts": {
     "install": "cd server && npm install && cd ../client && npm install",
     "seed": "cd server && npm run seed",
-    "develop": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
+    "dev": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
     "start": "node server/server.js --ignore client",
     "build": "cd client && npm run build"
   },
@@ -15,5 +15,11 @@
   "license": "ISC",
   "devDependencies": {
     "concurrently": "^5.1.0"
+  },
+  "dependencies": {
+    "@stripe/stripe-js": "^1.48.0",
+    "bootstrap": "^5.2.3",
+    "react": "^18.2.0",
+    "react-bootstrap": "^2.7.2"
   }
 }
