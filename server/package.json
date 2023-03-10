@@ -1,0 +1,28 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "seed": "node seeds/seed.js",
+    "watch": "nodemon server.js",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@apollo/server": "^4.4.1",
+    "bcrypt": "^5.0.0",
+    "body-parser": "^1.20.2",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.2",
+    "graphql": "^16.2.0",
+    "graphql-tag": "^2.12.6",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.1.6"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.3"
+  }
+}
