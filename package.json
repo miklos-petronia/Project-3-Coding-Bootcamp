@@ -1,0 +1,19 @@
+{
+  "name": "project-3-coding-bootcamp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server/server.js",
+  "scripts": {
+    "install": "cd server && npm install && cd ../client && npm install",
+    "seed": "cd server && npm run seed",
+    "develop": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
+    "start": "node server/server.js --ignore client",
+    "build": "cd client && npm run build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^5.1.0"
+  }
+}
