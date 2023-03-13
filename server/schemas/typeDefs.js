@@ -2,37 +2,59 @@ const { gql } = require('graphql-tag');
 
 const typeDefs = gql`
 
-type User {
-    _id: ID
-    username: String
-    email: String
-    password: String
-    notes: [Note]
-    noteCount: Float
-  }
-
-  type Note {
+type Note {
     _id: ID
     category: String
-    text: String
+    noteInput: String
     link: String
-    username: String
     createdAt: String
+    userName: String
+    shared: Boolean
   }
 
-  type Query {
-    users: [User]
-    user(username: String!): User
-    notes(username: String!): [Note]
-    note(_id: ID!): Note
+type User {
+    _id: ID
+    firstName: String
+    userEmail: String
+    userName: String
+    userPwd: String
+    question: String
+    answer: String
+    notes: [Note]
+    sharedUserNotes: [Note]
+    notesTotal: Float
+  }
+
+  type Token {
+    authUser: User
+    userToken: ID!
+  }
+
+  type Share {
+    _id: ID
+    sharedCategory: String
+    sharedNotes: [Note]
   }
 
   type Mutation {
-    createUser(username: String!, email: String!, password: String!): User
-    postNote(category: String! text: String!, link: String, username: String!): Note
-    updateNote(category: String text: String, link: String, _id: ID!): Note
-    removeNote(_id: ID!): Note
+    signIn(userName: String!, userPwd: String!): User
+    additionalSignIn(userName: String! answer: String!): Token
+    createUser(firstName: String! userEmail: String!, userName: String!, userPwd: String!, question: String!, answer: String!): Token
+    postNote(category: String! noteInput: String!, link: String, userName: String!, shared: Boolean): Note
+    updateNote(category: String noteInput: String, link: String, _id: ID!): Note
+    deleteNote(_id: ID!): Note
+    shareUserNote(_id: ID!): Share
   }
+
+  type Query {
+    noteOne(_id: ID!): Note
+    notesAll(userName: String!): [Note]
+    sharedOne(sharedCategory: String!): Share
+    sharedAll: [Share]
+    userOne(userName: String!): User
+    usersAll: [User]
+  }
+
 `;
 
 module.exports = typeDefs;
