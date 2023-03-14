@@ -1,101 +1,90 @@
-// import React, { useState } from 'react';
-// import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import Button from 'react-bootstrap/Button'
+import Form from 'react-bootstrap/Form';
 
-// import { useMutation } from '@apollo/client';
-// import { ADD_USER } from '../utils/mutations';
+import { useMutation } from '@apollo/client';
+import { MUTATION_CREATE_USER } from '../utils/mutations';
 
-// import Auth from '../utils/auth';
+const SignUp = () => {
+  const [signUpForm, setSignUp] = useState({
+    firstName: '',
+    userName: '',
+    userEmail: '',
+    userPwd: '',
+    question: '',
+    answer: ''
+  });
+  
+  const [createUser, { error, data }] = 
+  useMutation(MUTATION_CREATE_USER);
 
-// const Signup = () => {
-//   const [formState, setFormState] = useState({
-//     username: '',
-//     email: '',
-//     password: '',
-//   });
-//   const [addUser, { error, data }] = useMutation(ADD_USER);
+  const inputSignUp = (event) => {
+    setSignUp({
+      ...signUpForm,
+      [event.target.name]: event.target.value
+    });
+  };
 
-//   const handleChange = (event) => {
-//     const { name, value } = event.target;
+  const signUpSubmit = async (event) => {
+    event.preventDefault();   
 
-//     setFormState({
-//       ...formState,
-//       [name]: value,
-//     });
-//   };
+    try {
+      const { data } = await createUser({
+        variables: { ...signUpForm },
+      });
 
-//   const handleFormSubmit = async (event) => {
-//     event.preventDefault();
-//     console.log(formState);
+      localStorage.setItem("tokenId", data.createUser.userToken)
+      window.location.assign("/home")
+    } catch (error) {
+      throw error
+    }
+  };
 
-//     try {
-//       const { data } = await addUser({
-//         variables: { ...formState },
-//       });
+  return (
+    <div>
+      <h4>SignUp Form</h4>
+    <Form onSubmit={signUpSubmit}>
+      <Form.Group className="mb-3" >
+        <Form.Label>First Name</Form.Label>
+        <Form.Control type="text" name="firstName" value={signUpForm.firstName} onChange={inputSignUp} placeholder="Your First Name" />
+      </Form.Group>
 
-//       Auth.login(data.addUser.token);
-//     } catch (e) {
-//       console.error(e);
-//     }
-//   };
+      <Form.Group className="mb-3" >
+        <Form.Label>Username</Form.Label>
+        <Form.Control type="text" name="userName" value={signUpForm.userName} onChange={inputSignUp} placeholder="Your Username" />
+      </Form.Group>
 
-//   return (
-//     <main className="flex-row justify-center mb-4">
-//       <div className="col-12 col-lg-10">
-//         <div className="card">
-//           <h4 className="card-header bg-dark text-light p-2">Sign Up</h4>
-//           <div className="card-body">
-//             {data ? (
-//               <p>
-//                 Success! You may now head{' '}
-//                 <Link to="/">back to the homepage.</Link>
-//               </p>
-//             ) : (
-//               <form onSubmit={handleFormSubmit}>
-//                 <input
-//                   className="form-input"
-//                   placeholder="Your username"
-//                   name="username"
-//                   type="text"
-//                   value={formState.name}
-//                   onChange={handleChange}
-//                 />
-//                 <input
-//                   className="form-input"
-//                   placeholder="Your email"
-//                   name="email"
-//                   type="email"
-//                   value={formState.email}
-//                   onChange={handleChange}
-//                 />
-//                 <input
-//                   className="form-input"
-//                   placeholder="******"
-//                   name="password"
-//                   type="password"
-//                   value={formState.password}
-//                   onChange={handleChange}
-//                 />
-//                 <button
-//                   className="btn btn-block btn-primary"
-//                   style={{ cursor: 'pointer' }}
-//                   type="submit"
-//                 >
-//                   Submit
-//                 </button>
-//               </form>
-//             )}
+      <Form.Group className="mb-3" >
+        <Form.Label>Email</Form.Label>
+        <Form.Control type="email" name="userEmail" value={signUpForm.userEmail} onChange={inputSignUp} placeholder="Your Email" />
+      </Form.Group>
 
-//             {error && (
-//               <div className="my-3 p-3 bg-danger text-white">
-//                 {error.message}
-//               </div>
-//             )}
-//           </div>
-//         </div>
-//       </div>
-//     </main>
-//   );
-// };
+      <Form.Group className="mb-3" >
+        <Form.Label>Password</Form.Label>
+        <Form.Control type="password" name="userPwd" value={signUpForm.userPwd} onChange={inputSignUp} placeholder="****" />
+      </Form.Group>
 
-// export default Signup;
+      <Form.Group className="mb-3" >
+        <Form.Label>Security Question</Form.Label>
+        <Form.Control type="text" name="question" value={signUpForm.question} onChange={inputSignUp} placeholder="question" />
+      </Form.Group>
+
+      <Form.Group className="mb-3" >
+        <Form.Label>Security Answer</Form.Label>
+        <Form.Control type="password" name="answer" value={signUpForm.answer} onChange={inputSignUp} placeholder="****" />
+      </Form.Group>
+      
+      <Button variant="primary" type="submit">
+        Submit
+      </Button>
+    </Form>
+    {error && (
+      <p>{error.message}</p>
+    )}
+   </div>
+  );
+};
+
+export default SignUp;
 
