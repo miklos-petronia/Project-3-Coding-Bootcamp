@@ -3,8 +3,7 @@ const users = [
         firstName: "David",
         userName: "drestivo",
         userEmail: "davidr@gmail.com",
-        userPwd: "Bootcamp@2",
-        question: "question",
+        userPwd: "Bootcamp@2", question: "question",
         answer: "answer",
         notes: [],
         sharedUserNotes: []
