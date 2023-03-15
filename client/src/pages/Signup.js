@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form';
+import './Signup.css'
 
 import { useMutation } from '@apollo/client';
 import { MUTATION_CREATE_USER } from '../utils/mutations';
@@ -41,48 +42,62 @@ const SignUp = () => {
     }
   };
 
+  
+    
+
   return (
     <div>
-      <h4>SignUp Form</h4>
+      <body className='body'>
+      <h4 className='form-header'>SignUp Form</h4>
     <Form onSubmit={signUpSubmit}>
-      <Form.Group className="mb-3" >
-        <Form.Label>First Name</Form.Label>
-        <Form.Control type="text" name="firstName" value={signUpForm.firstName} onChange={inputSignUp} placeholder="Your First Name" />
+      <Form.Group className="hidden md:inline bg-slate-900 text-black px-4 lg:px-8 py-2 lg:py-4 rounded-full dark:bg-slate-800" >
+        <Form.Label className='fw-bold '>First Name</Form.Label>
+        <Form.Control type="text"  class="form-control" name="firstName" value={signUpForm.firstName} onChange={inputSignUp} placeholder="Your First Name " />
       </Form.Group>
-
-      <Form.Group className="mb-3" >
-        <Form.Label>Username</Form.Label>
+    <div class="form-group">
+      <Form.Group className="hidden md:inline bg-slate-900 text-black px-4 lg:px-8 py-2 lg:py-4 rounded-full dark:bg-slate-800" >
+        <Form.Label className='fw-bold'>Username</Form.Label>
         <Form.Control type="text" name="userName" value={signUpForm.userName} onChange={inputSignUp} placeholder="Your Username" />
       </Form.Group>
-
-      <Form.Group className="mb-3" >
-        <Form.Label>Email</Form.Label>
-        <Form.Control type="email" name="userEmail" value={signUpForm.userEmail} onChange={inputSignUp} placeholder="Your Email" />
+      </div>
+      <div class="form-group">
+      <Form.Group className="hidden md:inline bg-slate-900 text-black px-4 lg:px-8 py-2 lg:py-4 rounded-full dark:bg-slate-800" >
+        <Form.Label className='fw-bold'>Email</Form.Label>
+        <Form.Control type="email" class="form-control" name="userEmail" value={signUpForm.userEmail} onChange={inputSignUp} placeholder="Your Email" />
       </Form.Group>
+      </div>
 
-      <Form.Group className="mb-3" >
-        <Form.Label>Password</Form.Label>
-        <Form.Control type="password" name="userPwd" value={signUpForm.userPwd} onChange={inputSignUp} />
+      <div class="form-group">
+      <Form.Group className="hidden md:inline bg-slate-900 text-black px-4 lg:px-8 py-2 lg:py-4 rounded-full dark:bg-slate-800" >
+        <Form.Label className='fw-bold'>Password</Form.Label>
+        <Form.Control type="password" class="form-control" name="userPwd" value={signUpForm.userPwd} onChange={inputSignUp} />
       </Form.Group>
+      </div>
 
-      <Form.Group className="mb-3" >
-        <Form.Label>Security Question</Form.Label>
-        <Form.Control type="text" name="question" value={signUpForm.question} onChange={inputSignUp} placeholder="question" />
+      <div class="form-group">
+      <Form.Group className="hidden md:inline bg-slate-900 text-black px-4 lg:px-8 py-2 lg:py-4 rounded-full dark:bg-slate-800" >
+        <Form.Label className='fw-bold' >Security Question</Form.Label>
+        <Form.Control type="text" class="form-control" name="question" value={signUpForm.question} onChange={inputSignUp} placeholder="question" />
       </Form.Group>
+      </div>
 
-      <Form.Group className="mb-3" >
-        <Form.Label>Security Answer</Form.Label>
-        <Form.Control type="password" name="answer" value={signUpForm.answer} onChange={inputSignUp}  />
+      <div class="form-group">
+      <Form.Group className="hidden md:inline bg-slate-900 text-black px-4 lg:px-8 py-2 lg:py-4 rounded-full dark:bg-slate-800" >
+        <Form.Label className='fw-bold'>Security Answer</Form.Label>
+        <Form.Control type="password" class="form-control" name="answer" value={signUpForm.answer} onChange={inputSignUp}  />
       </Form.Group>
+      </div>
       
-      <Button variant="primary" type="submit">
+      <Button variant="primary rounded-pill hover" type="submit" class="btn-submit" >
         Submit
       </Button>
     </Form>
     {error && (
-      <p>{error.message}</p>
+      <p class="error">{error.message}</p>
     )}
+    </body>
    </div>
+   
   );
 };
 

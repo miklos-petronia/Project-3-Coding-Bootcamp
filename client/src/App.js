@@ -13,6 +13,7 @@ import SignUp from './pages/Signup';
 import Login from './pages/Login';
 import Header from './components/Header';
 import { LoggedStatusProvider } from './utils/Context';
+import Button from 'react-bootstrap/Button'
 
 const httpLink = createHttpLink({
   uri: '/graphql',
