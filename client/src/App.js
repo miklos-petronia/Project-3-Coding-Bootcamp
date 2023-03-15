@@ -12,7 +12,7 @@ import Home from './pages/Home';
 import SignUp from './pages/Signup';
 import Login from './pages/Login';
 import Header from './components/Header';
-
+import { LoggedStatusProvider } from './utils/Context';
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -40,28 +40,30 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
-      <Router>
-        <Header />
+      <LoggedStatusProvider>
+        <Router>
+          <Header />
 
 
-        <div>
-          <Routes>
-            <Route
-              path="/Home"
-              element={<Home />}
-            />
-            <Route
-              path="/"
-              element={<Login />}
-            />
-            <Route
-              path="/signup"
-              element={<SignUp />}
-            />
+          <div>
+            <Routes>
+              <Route
+                path="/Home"
+                element={<Home />}
+              />
+              <Route
+                path="/"
+                element={<Login />}
+              />
+              <Route
+                path="/signup"
+                element={<SignUp />}
+              />
 
-          </Routes>
-        </div>
-      </Router>
+            </Routes>
+          </div>
+        </Router>
+      </LoggedStatusProvider>
     </ApolloProvider >
   );
 }
