@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form';
@@ -62,7 +62,7 @@ const SignUp = () => {
 
       <Form.Group className="mb-3" >
         <Form.Label>Password</Form.Label>
-        <Form.Control type="password" name="userPwd" value={signUpForm.userPwd} onChange={inputSignUp} placeholder="****" />
+        <Form.Control type="password" name="userPwd" value={signUpForm.userPwd} onChange={inputSignUp} />
       </Form.Group>
 
       <Form.Group className="mb-3" >
@@ -72,7 +72,7 @@ const SignUp = () => {
 
       <Form.Group className="mb-3" >
         <Form.Label>Security Answer</Form.Label>
-        <Form.Control type="password" name="answer" value={signUpForm.answer} onChange={inputSignUp} placeholder="****" />
+        <Form.Control type="password" name="answer" value={signUpForm.answer} onChange={inputSignUp}  />
       </Form.Group>
       
       <Button variant="primary" type="submit">
