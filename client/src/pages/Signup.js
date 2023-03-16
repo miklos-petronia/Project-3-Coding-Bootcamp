@@ -42,7 +42,7 @@ const SignUp = () => {
   };
 
   return (
-    <div>
+    <div style={{paddingLeft:"200px", paddingRight:"200px", paddingTop:"150px"}}>
       <h4>SignUp Form</h4>
     <Form onSubmit={signUpSubmit}>
       <Form.Group className="mb-3" >
