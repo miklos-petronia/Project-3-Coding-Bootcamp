@@ -1,6 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import decode from "jwt-decode"
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
 
 
 const Header = () => {
@@ -32,20 +35,24 @@ const Header = () => {
     return (
 
         <>
-        <div>
-            {SignedIn() ? (
-                <>
-                <button onClick={logout}>logout</button>
-                </>
-            ) : (
-                <>
-                <Link to="/">login</Link>
-                <Link to="/signup">signup</Link>
-                </>
-            )}
-        </div>
+            <Navbar bg="dark" variant="dark">
+                <Container>
+                    <Navbar.Brand href="/">Code Tracker</Navbar.Brand>
+                    <Nav className="d-flex justify-contents-end">
+                    {SignedIn() ? (
+                        <Nav.Link onClick={logout}>Logout</Nav.Link>
+                ) : (
+                    <div className='d-flex gap-3'>
+                        <Link style={{textDecoration: "none", color: "#ffffff"}} to="/">Login</Link>
+                        <Link style={{textDecoration: "none", color: "#ffffff"}} to="/signup">Signup</Link>
+                    </div>
+                )} 
+                    </Nav>
+                </Container>
+            </Navbar>
+            
         </>
-       
+
     );
 };
 

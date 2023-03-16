@@ -4,7 +4,6 @@ import { useMutation } from '@apollo/client';
 import { MUTATION_FIRST_SIGN_IN, MUTATION_ADDITIONAL_SIGN_IN } from "../utils/mutations"
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form';
-// import Header from '../components/Header';
 
 function Login() {
   const [firstSignInForm, setFirstSignIn] = useState({ userName: "", userPwd: "" })
@@ -82,6 +81,13 @@ function Login() {
 
   return (
     <div>
+      <h2 style={{paddingLeft:"200px", paddingRight:"200px", paddingTop:"100px"}}>
+        <span>Welcome to Code Taker <br></br> <br></br>
+            Login to start your Note Repository!
+        </span>
+      </h2>
+      <br></br>
+      <div style={{paddingLeft:"200px", paddingRight:"200px", paddingTop:"50px"}}>
       <h4>Login Form</h4>
     <Form onSubmit={firstSignInSubmit}>
       <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -98,6 +104,7 @@ function Login() {
         Submit
       </Button>
     </Form>
+    </div>
     {firstLoginError && (
       <p>{firstLoginError.message}</p>
     )}
