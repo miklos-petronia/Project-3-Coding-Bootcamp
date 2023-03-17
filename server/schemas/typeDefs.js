@@ -44,6 +44,7 @@ type User {
     updateNote(category: String noteInput: String, link: String, _id: ID!): Note
     deleteNote(_id: ID!): Note
     shareUserNote(_id: ID!): Share
+    notShareNote(_id: ID!): Share
   }
 
   type Query {

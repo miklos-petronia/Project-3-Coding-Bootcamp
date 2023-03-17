@@ -60,6 +60,24 @@ mutation ShareUserNote($id: ID!) {
 }
 `
 
+export const MUTATION_NOT_SHARE_NOTE = gql`
+mutation NotShareNote($id: ID!) {
+  notShareNote(_id: $id) {
+    _id
+    sharedCategory
+    sharedNotes {
+      _id
+      category
+      noteInput
+      link
+      createdAt
+      userName
+      shared
+    }
+  }
+}
+`
+
 export const MUTATION_CREATE_USER = gql`
 mutation CreateUser($firstName: String!, $userEmail: String!, $userName: String!, $userPwd: String!, $question: String!, $answer: String!) {
   createUser(firstName: $firstName, userEmail: $userEmail, userName: $userName, userPwd: $userPwd, question: $question, answer: $answer) {

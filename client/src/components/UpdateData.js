@@ -45,19 +45,19 @@ const UpdateData = ({editData}) => {
             <Form onSubmit={submitData}>
                 <Form.Group className="mb-3" >
                     <Form.Label>Category</Form.Label>
-                    <Form.Control type="text" name="category" value={updateForm.category} onChange={inputUpdate} placeholder="Your First Name" />
+                    <Form.Control type="text" name="category" value={updateForm.category} onChange={inputUpdate} />
                 </Form.Group>
 
                 <Form.Group className="mb-3" >
                     <Form.Label>Note </Form.Label>
-                    <Form.Control type="text" name="noteInput" value={updateForm.noteInput} onChange={inputUpdate} placeholder="Your Username" />
+                    <Form.Control type="text" name="noteInput" value={updateForm.noteInput} onChange={inputUpdate} />
                 </Form.Group>
 
                 
 
                 <Form.Group className="mb-3" >
                     <Form.Label>Link</Form.Label>
-                    <Form.Control type="text" name="link" value={updateForm.link} onChange={inputUpdate} placeholder="question" />
+                    <Form.Control type="text" name="link" value={updateForm.link} onChange={inputUpdate} />
                 </Form.Group>
 
                

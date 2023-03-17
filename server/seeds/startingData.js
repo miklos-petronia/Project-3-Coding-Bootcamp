@@ -3,9 +3,9 @@ const users = [
         firstName: "David",
         userName: "drestivo",
         userEmail: "davidr@gmail.com",
-        userPwd: "Bootcamp@2",
-        question: "question",
-        answer: "answer",
+        userPwd: "password",
+        question: "What is your favorite food?",
+        answer: "tacos",
         notes: [],
         sharedUserNotes: []
     }

@@ -1,87 +1,139 @@
 import { useMutation, useQuery } from "@apollo/client";
-import { QUERY_ALL_USERS, QUERY_ONE_USER } from "../utils/queries"
+import { QUERY_ONE_USER } from "../utils/queries"
 import { useSiteContext } from "../utils/Context"
-import {useState} from "react"
+import { useState } from "react"
+
 import { MUTATION_DELETE_NOTE } from "../utils/mutations"
+import { MUTATION_SHARE_USER_NOTE, MUTATION_NOT_SHARE_NOTE } from '../utils/mutations'
+
 import UpdateData from "../components/UpdateData"
 import PostData from "../components/PostData"
+import Shared from '../components/Shared';
+
+import Table from 'react-bootstrap/Table';
+
 const Home = () => {
 
     const { userToken } = useSiteContext()
     const tokenData = userToken()
-    // const { loading, data: usersData } = useQuery(QUERY_ALL_USERS);
+
     const { loading: loadingUserOneData, data: userOneData } = useQuery(QUERY_ONE_USER, {
         variables: { userName: tokenData.data.userName }
     });
-    console.log(tokenData.data.userName)
 
-const [editForm, setEditForm] = useState("")
+    const [editForm, setEditForm] = useState("")
     const [editData, setEditData] = useState({})
 
     const displayEditForm = (data) => {
-        setEditData({...data})
+        setEditData({ ...data })
         setEditForm("displayEditForm")
     }
 
-    const closeEditForm = () => { 
+    const closeEditForm = () => {
         setEditForm("")
     }
 
     const [RemoveData, { error }] = useMutation(MUTATION_DELETE_NOTE)
     const submitDelete = async (item) => {
-        try { 
+        try {
             await RemoveData({
-                variables: {id: item._id}
+                variables: { id: item._id }
             })
             window.location.assign("/home")
         } catch (error) {
             throw error
-        } 
-    
+        }
+
     }
 
+    const [shareNote, { error: errorNoteShare }] = useMutation(MUTATION_SHARE_USER_NOTE);
+    const [notShareNote, { error: errorNoteNotShare }] = useMutation(MUTATION_NOT_SHARE_NOTE);
 
+    const shareSubmit = async (item) => {
+        try {
+            const { data } = await shareNote({
+                variables: { id: item._id },
+            })
+            window.location.assign('/home')
+        } catch (error) {
+            throw error
+        }
+    }
 
+    const notShareSubmit = async (item) => {
+        try {
+            const { data } = await notShareNote({
+                variables: { id: item._id },
+            })
+            window.location.assign('/home')
+        } catch (error) {
+            throw error
+        }
+    }
+
+    const [postForm, displayPostForm] = useState('');
+
+    const postFormButton = () => {
+        postForm === true ? displayPostForm(false) : displayPostForm(true);
+    }
 
     return (
         <>
-            {loadingUserOneData ? (<div>loading...</div>) : (
+            {loadingUserOneData ? (<div>getting notes..</div>) : (
                 <>
-                    <div>
-                        <h1>{userOneData.userOne.userName}</h1>
-                        <h1>{userOneData.userOne.firstName}</h1>
+                    <div style={{ paddingLeft: "75px", paddingRight: "75px", paddingTop: "50px" }}>
+                        <h2>Hi {userOneData.userOne.firstName}!</h2>
+                        <h5 className="pt-2" style={{ fontFamily: 'cursive' }}>Total Saved Notes: {userOneData.userOne.notesTotal}</h5>
+                        <Table striped bordered hover>
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Category</th>
+                                    <th>Notes | Code</th>
+                                    <th>Link</th>
+                                    <th>Shared</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {userOneData.userOne.notes.map((item, i) => (
+                                    <tr key={item._id}>
+                                        <td>{i + 1}</td>
+                                        <td>{item.category}</td>
+                                        <td>{item.noteInput}</td>
+                                        <td><a href={item.link} target="_blank">Link</a></td>
+                                        <td>{item.shared === true ? "Shared" : "Not Shared"}</td>
+                                        <td className="d-flex gap-1">
+                                            <button className="bg-info text-white" type="button" onClick={(event) => displayEditForm(item)}>edit</button>
+                                            <button className="bg-danger text-white" type="button" onClick={(event) => submitDelete(item)}>delete</button>
+                                            {item.shared === false ? (<button type="button" onClick={(event) => shareSubmit(item)}>share</button>) :
+                                                (<button type="button" onClick={(event) => notShareSubmit(item)}>not share</button>)}
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </Table>
+
                         <div>
-
-                            {userOneData.userOne.notes.map((item) => (
-                                <div key={item._id}>
-                                    <p>{item.category}</p>
-                                    <p>{item.noteInput}</p>
-                                    <p>{item.link}</p>
-                                    <p>{item.createdAt}</p>
-                                    <button type="button" onClick={(event) => displayEditForm(item)}>edit</button>
-
-                                    <button type="button" onClick={closeEditForm}>close</button>
-                                    <button type="button" onClick={(event) => submitDelete(item)}>delete</button>
-                                </div>
-                            ))}
+                            {editForm === "displayEditForm" ? (<button type="button" onClick={closeEditForm}>Close Form</button>) :
+                                (
+                                    <>
+                                        {!postForm && <button type="button" onClick={postFormButton}>Add a New Note</button>}
+                                        {postForm && <button type="button" onClick={postFormButton}>Close Form</button>}
+                                    </>
+                                )}
                         </div>
-                        {editForm === "displayEditForm" && <UpdateData editData={editData}/>}
+
+                        <div style={{ paddingTop: "25px" }}>
+                            {postForm && <PostData />}
+                        </div>
+
+                        {editForm === "displayEditForm" && <UpdateData editData={editData} />}
                     </div>
                 </>
             )}
-            <PostData />
-            {/* {loading ? (<div>loading...</div>) : (
-            <>
-            {usersData.usersAll.map((item) => (
-                <div key={item._id}>
-                    <p>{item.firstName}</p>
-                    <p>{item.userName}</p>
-                    <p>{item.userEmail}</p>
 
-                </div>
-            ))}
-            </>
-        )} */}
+            <Shared />
         </>
     );
 };
