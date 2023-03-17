@@ -120,22 +120,23 @@ async function postUserNote(_, { category, noteInput, link, userName, shared }) 
 // Note findOneAndUpdate
 async function updateUserNote(_, { category, noteInput, link, _id }) {
   try {
+    const dataNote = await Note.findOne({ _id: _id });
+
     await Note.findOneAndUpdate({ _id: _id }, { $set: { category: category, noteInput: noteInput, link: link } }, { new: true });
-    const findSharedId = await Share.findOne({}, { sharedNotes: { $elemMatch: { _id: _id } } });
+
+    const findSharedId = await Share.findOne({sharedCategory: dataNote.category}, { sharedNotes: { $elemMatch: { _id: dataNote._id } } });
     const findShared = await Share.findOne({ _id: findSharedId._id });
 
     if (category.toLowerCase() != findShared.sharedCategory) {
-      await Share.findOneAndUpdate({ _id: findSharedId._id }, { $pull: { sharedNotes: _id } });
       const note = await Note.findOneAndUpdate({ _id: _id }, { $set: { shared: false } }, {new: true});
-      await User.findOneAndUpdate({ userName: note.userName }, { $pull: { sharedUserNotes: _id } });
+      await Share.findOneAndUpdate({ _id: findSharedId._id }, { $pull: { sharedNotes: note._id } });
+      await User.findOneAndUpdate({ userName: note.userName }, { $pull: { sharedUserNotes: note._id } });
     };
 
     const noteShared = await Note.findOne({ _id: _id })
-
     if (noteShared.shared === false) {
       await Share.findOneAndUpdate({ _id: findSharedId._id }, { $pull: { sharedNotes: noteShared._id } });
     } 
-
     const data = Note.findOne({ _id: _id });
     switch (true) {
       case (!data):
