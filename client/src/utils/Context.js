@@ -5,9 +5,9 @@ const SiteContext = createContext();
 export const useSiteContext = () => useContext(SiteContext)
 export const LoggedStatusProvider = ({children}) => {
     const userToken = () => {
-        if (!decode(localStorage.getItem("tokenId"))) 
+        if (!localStorage.getItem("tokenId")) 
         {
-            return
+            return window.location.assign('/')
         } else {
             return decode(localStorage.getItem("tokenId"))
         }

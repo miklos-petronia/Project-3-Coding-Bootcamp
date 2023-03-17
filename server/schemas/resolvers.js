@@ -126,9 +126,15 @@ async function updateUserNote(_, { category, noteInput, link, _id }) {
 
     if (category.toLowerCase() != findShared.sharedCategory) {
       await Share.findOneAndUpdate({ _id: findSharedId._id }, { $pull: { sharedNotes: _id } });
-      const note = await Note.findOneAndUpdate({ _id: _id }, { $set: { shared: false } });
+      const note = await Note.findOneAndUpdate({ _id: _id }, { $set: { shared: false } }, {new: true});
       await User.findOneAndUpdate({ userName: note.userName }, { $pull: { sharedUserNotes: _id } });
     };
+
+    const noteShared = await Note.findOne({ _id: _id })
+
+    if (noteShared.shared === false) {
+      await Share.findOneAndUpdate({ _id: findSharedId._id }, { $pull: { sharedNotes: noteShared._id } });
+    } 
 
     const data = Note.findOne({ _id: _id });
     switch (true) {
@@ -174,6 +180,20 @@ async function noteShare(_, { _id }) {
       return data
     }
 
+  } catch (re) { throw re }
+}
+
+async function noteNotShare(_, { _id }) {
+  try {
+    const note = await Note.findOneAndUpdate({ _id: _id }, { $set: { shared: false } }, { new: true });
+    await User.findOneAndUpdate({ userName: note.userName }, { $pull: { sharedUserNotes: note._id } })
+    const fnd = await Share.findOne({ sharedCategory: note.category.toLowerCase() });
+    if (!fnd) {
+      return
+    } else {
+      const data = await Share.findOneAndUpdate({ sharedCategory: fnd.sharedCategory }, { $pull: { sharedNotes: note._id } }, { new: true }).populate(sharedAllNotes);
+      return data
+    }
   } catch (re) { throw re }
 }
 
@@ -246,6 +266,7 @@ const resolvers = {
     updateNote: updateUserNote,
     deleteNote: deleteUserNote,
     shareUserNote: noteShare,
+    notShareNote: noteNotShare,
     signIn: firstSignIn,
     additionalSignIn: secondSignIn,
     createUser: createNewUser

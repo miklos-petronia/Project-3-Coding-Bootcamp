@@ -48,19 +48,19 @@ const PostData = () => {
             <Form onSubmit={submitData}>
                 <Form.Group className="mb-3" >
                     <Form.Label>Category</Form.Label>
-                    <Form.Control type="text" name="category" value={postForm.category} onChange={inputPost} placeholder="Your First Name" />
+                    <Form.Control type="text" name="category" value={postForm.category} onChange={inputPost} />
                 </Form.Group>
 
                 <Form.Group className="mb-3" >
                     <Form.Label>Note </Form.Label>
-                    <Form.Control type="text" name="noteInput" value={postForm.noteInput} onChange={inputPost} placeholder="Your Username" />
+                    <Form.Control type="text" name="noteInput" value={postForm.noteInput} onChange={inputPost} />
                 </Form.Group>
 
                 
 
                 <Form.Group className="mb-3" >
                     <Form.Label>Link</Form.Label>
-                    <Form.Control type="text" name="link" value={postForm.link} onChange={inputPost} placeholder="question" />
+                    <Form.Control type="text" name="link" value={postForm.link} onChange={inputPost} />
                 </Form.Group>
 
                
