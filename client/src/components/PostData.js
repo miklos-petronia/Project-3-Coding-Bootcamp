@@ -15,7 +15,7 @@ const PostData = () => {
         noteInput: "",
         userName: tokenData.data.userName,
         link: "",
-        shared: false, 
+        shared: false,
     });
 
     const [postNote, { error }] = useMutation(MUTATION_POST_NOTE);
@@ -35,7 +35,7 @@ const PostData = () => {
                 variables: postForm,
             });
 
-           
+
             window.location.assign("/home")
         } catch (error) {
             throw error
@@ -56,14 +56,16 @@ const PostData = () => {
                     <Form.Control type="text" name="noteInput" value={postForm.noteInput} onChange={inputPost} />
                 </Form.Group>
 
-                
+
 
                 <Form.Group className="mb-3" >
                     <Form.Label>Link</Form.Label>
-                    <Form.Control type="text" name="link" value={postForm.link} onChange={inputPost} />
+                    <Form.Control placeHolder="http://<mylink>.com" type="text" name="link" value={postForm.link}
+                        onChange=
+                        {inputPost} />
                 </Form.Group>
 
-               
+
 
                 <Button variant="primary" type="submit">
                     Submit
