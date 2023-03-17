@@ -104,7 +104,6 @@ function Login() {
         Submit
       </Button>
     </Form>
-    </div>
     {firstLoginError && (
       <p>{firstLoginError.message}</p>
     )}
@@ -112,8 +111,8 @@ function Login() {
 
       {firstSignInStatus === true && (
          
-    <Form onSubmit={secondSignInSubmit}>
-      <h2>{question}</h2>
+    <Form className="pt-5" onSubmit={secondSignInSubmit}>
+      <h4>{question}</h4>
      
       <Form.Group className="mb-3" controlId="formBasicPassword">
         <Form.Label>Answer</Form.Label>
@@ -126,6 +125,7 @@ function Login() {
     </Form>
 
       )}
+      </div>
 
     </div>
   );
