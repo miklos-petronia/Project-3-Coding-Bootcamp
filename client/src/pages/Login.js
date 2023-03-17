@@ -123,8 +123,10 @@ function Login() {
         Submit
       </Button>
     </Form>
-
       )}
+      {secondLoginError && (
+      <p>{secondLoginError.message}</p>
+    )}
       </div>
 
     </div>
