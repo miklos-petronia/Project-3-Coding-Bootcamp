@@ -25,6 +25,7 @@ of the project and several templates: edX Boot Camps LLC
 
 
 ## Application Screenshot
+![screenshot](assets/images/screenshot-codetracker.png)
 
 
 
