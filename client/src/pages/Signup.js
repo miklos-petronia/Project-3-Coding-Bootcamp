@@ -15,9 +15,9 @@ const SignUp = () => {
     question: '',
     answer: ''
   });
-  
-  const [createUser, { error, data }] = 
-  useMutation(MUTATION_CREATE_USER);
+
+  const [createUser, { error, data }] =
+    useMutation(MUTATION_CREATE_USER);
 
   const inputSignUp = (event) => {
     setSignUp({
@@ -27,7 +27,7 @@ const SignUp = () => {
   };
 
   const signUpSubmit = async (event) => {
-    event.preventDefault();   
+    event.preventDefault();
 
     try {
       const { data } = await createUser({
@@ -42,47 +42,55 @@ const SignUp = () => {
   };
 
   return (
-    <div style={{paddingLeft:"200px", paddingRight:"200px", paddingTop:"150px"}}>
-      <h4>SignUp Form</h4>
-    <Form onSubmit={signUpSubmit}>
-      <Form.Group className="mb-3" >
-        <Form.Label>First Name</Form.Label>
-        <Form.Control type="text" name="firstName" value={signUpForm.firstName} onChange={inputSignUp} placeholder="Your First Name" />
-      </Form.Group>
+    <div>
+      <h2 style={{ paddingLeft: "200px", paddingRight: "200px", paddingTop: "100px", textAlign: "center" }}>
+        <span style={{ fontFamily: "cursive" }}>Welcome to Code Taker <br></br> <br></br>
+          Sign up to start your Note Repository!
+        </span>
+      </h2>
+      <br></br>
+      <div style={{ paddingLeft: "200px", paddingRight: "200px", paddingBottom: "200px" }}>
+        <h4>Signup Form</h4>
+        <Form onSubmit={signUpSubmit}>
+          <Form.Group className="mb-3" >
+            <Form.Label>First Name</Form.Label>
+            <Form.Control type="text" name="firstName" value={signUpForm.firstName} onChange={inputSignUp} placeholder="Your First Name" />
+          </Form.Group>
 
-      <Form.Group className="mb-3" >
-        <Form.Label>Username</Form.Label>
-        <Form.Control type="text" name="userName" value={signUpForm.userName} onChange={inputSignUp} placeholder="Your Username" />
-      </Form.Group>
+          <Form.Group className="mb-3" >
+            <Form.Label>Username</Form.Label>
+            <Form.Control type="text" name="userName" value={signUpForm.userName} onChange={inputSignUp} placeholder="Your Username" />
+          </Form.Group>
 
-      <Form.Group className="mb-3" >
-        <Form.Label>Email</Form.Label>
-        <Form.Control type="email" name="userEmail" value={signUpForm.userEmail} onChange={inputSignUp} placeholder="Your Email" />
-      </Form.Group>
+          <Form.Group className="mb-3" >
+            <Form.Label>Email</Form.Label>
+            <Form.Control type="email" name="userEmail" value={signUpForm.userEmail} onChange={inputSignUp} placeholder="Your Email" />
+          </Form.Group>
 
-      <Form.Group className="mb-3" >
-        <Form.Label>Password</Form.Label>
-        <Form.Control type="password" name="userPwd" value={signUpForm.userPwd} onChange={inputSignUp} />
-      </Form.Group>
+          <Form.Group className="mb-3" >
+            <Form.Label>Password</Form.Label>
+            <Form.Control type="password" name="userPwd" value={signUpForm.userPwd} onChange={inputSignUp} placeholder="*****" />
+          </Form.Group>
 
-      <Form.Group className="mb-3" >
-        <Form.Label>Security Question</Form.Label>
-        <Form.Control type="text" name="question" value={signUpForm.question} onChange={inputSignUp} placeholder="question" />
-      </Form.Group>
+          <Form.Group className="mb-3" >
+            <Form.Label>Security Question</Form.Label>
+            <Form.Control type="text" name="question" value={signUpForm.question} onChange={inputSignUp} placeholder="question" />
+          </Form.Group>
 
-      <Form.Group className="mb-3" >
-        <Form.Label>Security Answer</Form.Label>
-        <Form.Control type="password" name="answer" value={signUpForm.answer} onChange={inputSignUp}  />
-      </Form.Group>
-      
-      <Button variant="primary" type="submit">
-        Submit
-      </Button>
-    </Form>
-    {error && (
-      <p>{error.message}</p>
-    )}
-   </div>
+          <Form.Group className="mb-3" >
+            <Form.Label>Security Answer</Form.Label>
+            <Form.Control type="password" name="answer" value={signUpForm.answer} onChange={inputSignUp} placeholder="*****" />
+          </Form.Group>
+
+          <Button variant="secondary" type="submit">
+            Submit
+          </Button>
+        </Form>
+        {error && (
+          <p>{error.message}</p>
+        )}
+      </div>
+    </div>
   );
 };
 

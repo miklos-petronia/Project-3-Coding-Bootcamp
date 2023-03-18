@@ -18,9 +18,9 @@ The application produces a repository that allows developers to store code snipp
 
 Client - Server
 React, Node.js, Express.js, GraphQL, MongoDB and Mongoose
-[React Bootstrap and Bootstrap]
-Apollo Server, JSON Web Token, bcrypt
-Models (User, Note, and Share), Schemas, Seeds, Mutations and Queries
+React Bootstrap and Bootstrap
+Apollo Server, JSON Web Token, bcrypt, among others; source of the framework
+of the project and several templates: edX Boot Camps LLC
 
 
 
