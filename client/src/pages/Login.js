@@ -81,17 +81,17 @@ function Login() {
 
   return (
     <div>
-      <h2 style={{paddingLeft:"200px", paddingRight:"200px", paddingTop:"100px"}}>
-        <span>Welcome to Code Taker <br></br> <br></br>
+      <h2 style={{paddingLeft:"200px", paddingRight:"200px", paddingTop:"100px", textAlign:"center"}}>
+        <span style={{fontFamily: "cursive"}}>Welcome to Code Taker <br></br> <br></br>
             Login to start your Note Repository!
         </span>
       </h2>
       <br></br>
-      <div style={{paddingLeft:"200px", paddingRight:"200px", paddingTop:"50px"}}>
+      <div style={{paddingLeft:"200px", paddingRight:"200px", paddingTop:"50px", paddingBottom:"200px"}}>
       <h4>Login Form</h4>
     <Form onSubmit={firstSignInSubmit}>
       <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>username</Form.Label>
+        <Form.Label>Username</Form.Label>
         <Form.Control type="text" name="userName" value={firstSignInForm.userName} onChange={inputFirstSignIn} placeholder="Your username" />
       </Form.Group>
 
@@ -100,7 +100,7 @@ function Login() {
         <Form.Control type="password" name="userPwd" value={firstSignInForm.userPwd} onChange={inputFirstSignIn} placeholder="*****" />
       </Form.Group>
       
-      <Button variant="primary" type="submit">
+          <Button variant="secondary" type="submit">
         Submit
       </Button>
     </Form>
@@ -119,7 +119,7 @@ function Login() {
         <Form.Control type="password" name="answer" value={secondSignInForm.answer} onChange={inputSecondSignIn} placeholder="*****" />
       </Form.Group>
       
-      <Button variant="primary" type="submit">
+      <Button variant="secondary" type="submit">
         Submit
       </Button>
     </Form>

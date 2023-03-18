@@ -60,14 +60,14 @@ const PostData = () => {
 
                 <Form.Group className="mb-3" >
                     <Form.Label>Link</Form.Label>
-                    <Form.Control placeHolder="http://<mylink>.com" type="text" name="link" value={postForm.link}
+                    <Form.Control placeholder="http://<mylink>.com" type="text" name="link" value={postForm.link}
                         onChange=
                         {inputPost} />
                 </Form.Group>
 
 
 
-                <Button variant="primary" type="submit">
+                <Button variant="secondary" type="submit">
                     Submit
                 </Button>
             </Form>

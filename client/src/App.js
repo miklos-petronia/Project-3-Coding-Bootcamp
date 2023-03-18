@@ -48,7 +48,7 @@ function App() {
           <div>
             <Routes>
               <Route
-                path="/Home"
+                path="/home"
                 element={<Home />}
               />
               <Route

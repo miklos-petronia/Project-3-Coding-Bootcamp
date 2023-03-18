@@ -62,7 +62,7 @@ const UpdateData = ({editData}) => {
 
                
 
-                <Button variant="primary" type="submit">
+                <Button variant="secondary" type="submit">
                     Submit
                 </Button>
             </Form>

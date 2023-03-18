@@ -23,7 +23,10 @@ function Shared() {
                                             <ListGroup key={s._id} variant="flush" className="border border-success">
                                                 <ListGroup.Item className="d-flex justify-content-between">
                                                     <span>{s.noteInput}</span>
-                                                    <a href={!s.link ? {} : s.link} target="_blank">Link to the Note | Code</a>
+                                                    <div className='d-flex gap-3'>
+                                                        <span>by: {s.userName}</span>
+                                                        <a href={!s.link ? {} : s.link} target="_blank">Link</a>
+                                                    </div>
                                                 </ListGroup.Item>
                                             </ListGroup>
                                         ))}

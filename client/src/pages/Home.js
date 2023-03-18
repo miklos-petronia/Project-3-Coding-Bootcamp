@@ -84,13 +84,14 @@ const Home = () => {
                     <div style={{ paddingLeft: "75px", paddingRight: "75px", paddingTop: "50px" }}>
                         <h2>Hi {userOneData.userOne.firstName}!</h2>
                         <h5 className="pt-2" style={{ fontFamily: 'cursive' }}>Total Saved Notes: {userOneData.userOne.notesTotal}</h5>
-                        <Table striped bordered hover>
+                        <Table className="bg-body">
                             <thead>
                                 <tr>
                                     <th>#</th>
                                     <th>Category</th>
                                     <th>Notes | Code</th>
                                     <th>Link</th>
+                                    <th>Date</th>
                                     <th>Shared</th>
                                     <th>Actions</th>
                                 </tr>
@@ -102,12 +103,15 @@ const Home = () => {
                                         <td>{item.category}</td>
                                         <td>{item.noteInput}</td>
                                         <td><a href={item.link} target="_blank">Link</a></td>
+                                        <td>{item.createdAt}</td>
                                         <td>{item.shared === true ? "Shared" : "Not Shared"}</td>
-                                        <td className="d-flex gap-1">
-                                            <button className="bg-info text-white" type="button" onClick={(event) => displayEditForm(item)}>edit</button>
-                                            <button className="bg-danger text-white" type="button" onClick={(event) => submitDelete(item)}>delete</button>
-                                            {item.shared === false ? (<button type="button" onClick={(event) => shareSubmit(item)}>share</button>) :
-                                                (<button type="button" onClick={(event) => notShareSubmit(item)}>not share</button>)}
+                                        <td>
+                                            <div>
+                                                <button className="bg-success text-white mx-1" type="button" onClick={(event) => displayEditForm(item)}>edit</button>
+                                                <button className="bg-danger text-white mx-1" type="button" onClick={(event) => submitDelete(item)}>delete</button>
+                                                {item.shared === false ? (<button className="mx-1" type="button" onClick={(event) => shareSubmit(item)}>share</button>) :
+                                                    (<button className="mx-1" type="button" onClick={(event) => notShareSubmit(item)}>not share</button>)}
+                                            </div>
                                         </td>
                                     </tr>
                                 ))}
@@ -115,11 +119,11 @@ const Home = () => {
                         </Table>
 
                         <div>
-                            {editForm === "displayEditForm" ? (<button type="button" onClick={closeEditForm}>Close Form</button>) :
+                            {editForm === "displayEditForm" ? (<button className="bg-secondary text-white" type="button" onClick={closeEditForm}>Close Form</button>) :
                                 (
                                     <>
-                                        {!postForm && <button type="button" onClick={postFormButton}>Add a New Note</button>}
-                                        {postForm && <button type="button" onClick={postFormButton}>Close Form</button>}
+                                        {!postForm && <button className="bg-secondary text-white" type="button" onClick={postFormButton}>Add a New Note</button>}
+                                        {postForm && <button className="bg-secondary text-white" type="button" onClick={postFormButton}>Close Form</button>}
                                     </>
                                 )}
                         </div>

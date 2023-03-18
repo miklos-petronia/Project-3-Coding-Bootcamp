@@ -15,7 +15,7 @@ const NoteS = new Schema(pt, opt);
 
 function fd(createdAt) {
   const date = new Date(createdAt);
-  return date.toLocaleString();
+  return date.toLocaleDateString();
 };
 
 const Note = model('Note', NoteS);
